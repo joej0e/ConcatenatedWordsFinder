@@ -14,16 +14,9 @@ public class MainTest {
 
     private FileWriter fileWriter;
 
-    private ConcatenatedWordsSortedList concatenatedWordsSortedList;
-
     @Before
     public void setUp() throws Exception {
         fileWriter = new FileWriter("test.txt");
-    }
-
-    @After
-    public void tearDown() {
-        concatenatedWordsSortedList = null;
     }
 
     @Test
@@ -47,7 +40,7 @@ public class MainTest {
         fileWriter.write("do car cardo");
         fileWriter.close();
         assertThrows(NotEnoughWordsInList.class, () -> {
-            concatenatedWordsSortedList = new ConcatenatedWordsSortedList("test.txt");
+            new ConcatenatedWordsSortedList("test.txt");
         });
     }
 
@@ -56,7 +49,7 @@ public class MainTest {
         fileWriter.write("do car war sir apple");
         fileWriter.close();
         assertThrows(NotEnoughWordsInList.class, () -> {
-            concatenatedWordsSortedList = new ConcatenatedWordsSortedList("test.txt");
+            new ConcatenatedWordsSortedList("test.txt");
         });
     }
 
@@ -64,7 +57,7 @@ public class MainTest {
     public void assertCorrectNumberOfWords() throws IOException {
         fileWriter.write("do car war carwar docarwar");
         fileWriter.close();
-        concatenatedWordsSortedList = new ConcatenatedWordsSortedList("test.txt");
+        ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList("test.txt");
         ConcatenatedWordsSortedList.FirstAndSecondLongestWordAndSize firstAndSecondLongestWordAndSize =
                 concatenatedWordsSortedList.getFirstAndSecondLongestWordAndSize();
         assertEquals("docarwar", firstAndSecondLongestWordAndSize.getFirstLongestWord());
