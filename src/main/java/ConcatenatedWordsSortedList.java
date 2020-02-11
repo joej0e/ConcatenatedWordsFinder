@@ -9,22 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 public final class ConcatenatedWordsSortedList {
 
-    private List<String> concatenatedWords;
-
-    private String getWordByIndex(int index) {
-        return concatenatedWords.get(index);
-    }
-
-    private int getSize() {
-        return concatenatedWords.size();
-    }
-
-    public ConcatenatedWordsSortedList(String fileName) throws IOException {
+    private List<String> getConcatenatedWordsSortedList(String fileName) throws IOException {
         Set<String> wordsSet = Sets.newHashSet(Files.asCharSource(
                 new File(fileName), Charsets.UTF_8).read().split(" "));
         if (wordsSet.size() < 4) {
@@ -38,7 +27,7 @@ public final class ConcatenatedWordsSortedList {
             throw new NotEnoughWordsInList(
                     "Unfortunately, there are not enough concatenated words in your file");
         }
-        this.concatenatedWords = concatenatedWords;
+        return concatenatedWords;
     }
 
     private List<String> createConcatenatedWordsSortedList(List<String> words) {
@@ -67,33 +56,20 @@ public final class ConcatenatedWordsSortedList {
         return concatenatedWords;
     }
 
-    public FirstAndSecondLongestWordAndSize getFirstAndSecondLongestWordAndSize() {
-        return new FirstAndSecondLongestWordAndSize();
-    }
+    public class LongestConcatenatedWordsDto {
 
-    public class FirstAndSecondLongestWordAndSize {
+        private final String firstLongestWord;
 
-        private String firstLongestWord;
+        private final String secondLongestWord;
 
-        private String secondLongestWord;
+        private final int concatenatedWordsSize;
 
-        private int concatenatedWordsSize;
-
-        public FirstAndSecondLongestWordAndSize() {
-            this.firstLongestWord = getWordByIndex(0);
-            this.secondLongestWord = getWordByIndex(1);
-            this.concatenatedWordsSize = getSize();
+        public LongestConcatenatedWordsDto(String fileName) throws IOException {
+            List<String> concatenatedWords = getConcatenatedWordsSortedList(fileName);
+            firstLongestWord = concatenatedWords.get(0);
+            secondLongestWord = concatenatedWords.get(1);
+            concatenatedWordsSize = concatenatedWords.size();
         }
-
-        @Override
-        public String toString() {
-            return "FirstAndSecondLongestWordAndSize{" +
-                    "firstLongestWord='" + firstLongestWord + '\'' +
-                    ", secondLongestWord='" + secondLongestWord + '\'' +
-                    ", concatenatedWordsSize=" + concatenatedWordsSize +
-                    '}';
-        }
-
 
         public String getFirstLongestWord() {
             return firstLongestWord;
@@ -106,5 +82,15 @@ public final class ConcatenatedWordsSortedList {
         public int getConcatenatedWordsSize() {
             return concatenatedWordsSize;
         }
+
+        @Override
+        public String toString() {
+            return "LongestConcatenatedWordsDto{" +
+                    "firstLongestWord='" + firstLongestWord + '\'' +
+                    ", secondLongestWord='" + secondLongestWord + '\'' +
+                    ", concatenatedWordsSize=" + concatenatedWordsSize +
+                    '}';
+        }
+
     }
 }

@@ -7,8 +7,10 @@ public class Main {
         System.out.println("Please, provide a file name...");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String fileName = reader.readLine();
-        ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList(fileName);
-        System.out.println(concatenatedWordsSortedList.getFirstAndSecondLongestWordAndSize().toString());
+        ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList();
+        ConcatenatedWordsSortedList.LongestConcatenatedWordsDto dto =
+                concatenatedWordsSortedList.new LongestConcatenatedWordsDto(fileName);
+        System.out.println(dto.toString());
     }
 
 }
