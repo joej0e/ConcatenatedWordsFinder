@@ -23,7 +23,7 @@ public class ConcatenatedWordsSortedListTest {
         String fileName = "";
         assertThrows(FileNotFoundException.class, () -> {
             ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList();
-            concatenatedWordsSortedList.new LongestConcatenatedWordsDto(fileName);
+            concatenatedWordsSortedList.getLongestConcatenatedWordsDto(fileName);
         });
     }
 
@@ -32,7 +32,7 @@ public class ConcatenatedWordsSortedListTest {
         String str = null;
         assertThrows(NullPointerException.class, () -> {
             ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList();
-            concatenatedWordsSortedList.new LongestConcatenatedWordsDto(str);
+            concatenatedWordsSortedList.getLongestConcatenatedWordsDto(str);
         });
     }
 
@@ -42,7 +42,7 @@ public class ConcatenatedWordsSortedListTest {
         fileWriter.close();
         assertThrows(NotEnoughWordsInList.class, () -> {
             ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList();
-            concatenatedWordsSortedList.new LongestConcatenatedWordsDto("text.txt");
+            concatenatedWordsSortedList.getLongestConcatenatedWordsDto("text.txt");
         });
     }
 
@@ -52,7 +52,7 @@ public class ConcatenatedWordsSortedListTest {
         fileWriter.close();
         assertThrows(NotEnoughWordsInList.class, () -> {
             ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList();
-            concatenatedWordsSortedList.new LongestConcatenatedWordsDto("text.txt");
+            concatenatedWordsSortedList.getLongestConcatenatedWordsDto("text.txt");
         });
     }
 
@@ -62,7 +62,7 @@ public class ConcatenatedWordsSortedListTest {
         fileWriter.close();
         ConcatenatedWordsSortedList concatenatedWordsSortedList = new ConcatenatedWordsSortedList();
         ConcatenatedWordsSortedList.LongestConcatenatedWordsDto dto =
-                concatenatedWordsSortedList.new LongestConcatenatedWordsDto("text.txt");
+                concatenatedWordsSortedList.getLongestConcatenatedWordsDto("text.txt");
         assertEquals("docarwar", dto.getFirstLongestWord());
         assertEquals("carwar", dto.getSecondLongestWord());
         assertEquals(2, dto.getConcatenatedWordsSize());

@@ -56,19 +56,29 @@ public final class ConcatenatedWordsSortedList {
         return concatenatedWords;
     }
 
+    public LongestConcatenatedWordsDto getLongestConcatenatedWordsDto(String fileName) throws IOException {
+        LongestConcatenatedWordsDto dto = new LongestConcatenatedWordsDto();
+        return dto.getDto(fileName, this);
+    }
+
     public class LongestConcatenatedWordsDto {
 
-        private final String firstLongestWord;
+        private String firstLongestWord = null;
 
-        private final String secondLongestWord;
+        private String secondLongestWord = null;
 
-        private final int concatenatedWordsSize;
+        private int concatenatedWordsSize = 0;
 
-        public LongestConcatenatedWordsDto(String fileName) throws IOException {
-            List<String> concatenatedWords = getConcatenatedWordsSortedList(fileName);
-            firstLongestWord = concatenatedWords.get(0);
-            secondLongestWord = concatenatedWords.get(1);
-            concatenatedWordsSize = concatenatedWords.size();
+        public LongestConcatenatedWordsDto getDto(String fileName, ConcatenatedWordsSortedList concatenatedWordsSortedList)
+                throws IOException {
+            if (firstLongestWord == null && secondLongestWord == null && concatenatedWordsSize == 0) {
+                List<String> concatenatedWords =
+                        concatenatedWordsSortedList.getConcatenatedWordsSortedList(fileName);
+                firstLongestWord = concatenatedWords.get(0);
+                secondLongestWord = concatenatedWords.get(1);
+                concatenatedWordsSize = concatenatedWords.size();
+            }
+            return this;
         }
 
         public String getFirstLongestWord() {
